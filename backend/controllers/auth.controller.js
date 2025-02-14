@@ -55,8 +55,6 @@ export const signup = async (req, res) => {
     });
 
     res.status(201).json({ message: "User created successfully" });
-
-    // TODO: send welcome email
   } catch (error) {
     console.log("Error in signup: ", error);
     res.status(500).json({
@@ -72,5 +70,17 @@ export const login = (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.send("logout");
+  res.clearCookie("jwt-linkedIn");
+  res.json({ message: "logout success" });
+};
+
+export const getCurrentUser = (req, res) => {
+  try {
+    res.json(req.user);
+  } catch (error) {
+    console.error("Error in getCurrentUser: ", error);
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
 };

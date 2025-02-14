@@ -1,6 +1,7 @@
 // 필요한 패키지 불러오기
 import express from "express"; // Express 웹 프레임워크 불러오기
 import dotenv from "dotenv"; // 환경변수 관리 패키지 불러오기
+import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route.js";
 
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use(express.json()); // parse JSON request body
 app.use("/api/v1/auth", authRoutes);
+app.use(cookieParser());
 
 // 서버 시작
 app.listen(PORT, () => {
