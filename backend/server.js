@@ -4,6 +4,7 @@ import dotenv from "dotenv"; // 환경변수 관리 패키지 불러오기
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route.js";
+import userRoutes from "./routes/user.route.js";
 
 import { connectDB } from "./lib/db.js";
 
@@ -16,8 +17,10 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(express.json()); // parse JSON request body
-app.use("/api/v1/auth", authRoutes);
 app.use(cookieParser());
+
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
 
 // 서버 시작
 app.listen(PORT, () => {
